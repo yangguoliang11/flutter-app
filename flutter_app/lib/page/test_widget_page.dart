@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:dio/dio.dart';
 
 
 class TestWidgetPage  extends StatefulWidget{
@@ -14,6 +15,20 @@ class _TestWidgetPageState extends State<TestWidgetPage> {
 
   ScrollController _scrollController;
 
+  void getHttp() async {
+    try {
+      Response response;
+      FormData formData = new FormData.fromMap({
+        "mobile": "1001",
+        "password": "123456",
+      });
+      response = await Dio().post("http://itemapi.weiyingjia.org/login/login",
+      data:formData);
+      return print(response);
+    } catch (e) {
+      return print(e);
+    }
+  }
   @override
 
   void initState() {
@@ -35,7 +50,7 @@ class _TestWidgetPageState extends State<TestWidgetPage> {
   Widget build(BuildContext context){
     return Scaffold(
       appBar: AppBar(
-        title:Text("组件测试0000000000"),
+        title:Text("项目管理系统"),
       ),
 
       body: SingleChildScrollView(
@@ -73,7 +88,7 @@ class _TestWidgetPageState extends State<TestWidgetPage> {
 
       bottomNavigationBar: BottomNavigationBar(items: [
         BottomNavigationBarItem(icon: Icon(Icons.home),title:Text("首页")),
-        BottomNavigationBarItem(icon: Icon(Icons.headset),title:Text("音乐")),
+        BottomNavigationBarItem(icon: Icon(Icons.person),title:Text("个人中心")),
 
       ],),
 
@@ -104,7 +119,7 @@ class _TestWidgetPageState extends State<TestWidgetPage> {
 
   _buildText(BuildContext context){
     return Text(
-     "文本控件",
+     "项目管理系统",
       style: TextStyle(
         color:Colors.amber,
         fontSize: 16,
@@ -147,8 +162,10 @@ class _TestWidgetPageState extends State<TestWidgetPage> {
 
   _buildButton(BuildContext context){
     return FlatButton(
-        onPressed: (){},
-        child: Text("按钮"),
+        onPressed: (){
+          getHttp();
+        },
+        child: Text("新建项目"),
 
     );
   }

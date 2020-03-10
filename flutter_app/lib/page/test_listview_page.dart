@@ -1,17 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutterapp/page/test_widget_page.dart';
 
 
-class TestScaffoldPage  extends StatefulWidget{
+class TestListviewPage  extends StatefulWidget{
   @override
 
-  _TestScaffoldPageState createState()=>_TestScaffoldPageState();
+  _TestListviewPage createState()=>_TestListviewPage();
 
 
 }
 
-class _TestScaffoldPageState extends State<TestScaffoldPage> {
+class _TestListviewPage extends State<TestListviewPage> {
 
   @override
 
@@ -37,7 +36,7 @@ class _TestScaffoldPageState extends State<TestScaffoldPage> {
         child: GestureDetector(
           onTap: () {
             Navigator.push(context,MaterialPageRoute(builder: (context){
-              return TestWidgetPage();
+              //return TestWidgetPage();
             }));
           },
           child: Center(
@@ -72,6 +71,6 @@ class _TestScaffoldPageState extends State<TestScaffoldPage> {
 
     );
 
-   }
+  }
 
 }
