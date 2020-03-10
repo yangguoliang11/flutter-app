@@ -1,22 +1,27 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutterapp/page/test_scaffold_page.dart';
 
 
 class TestWidgetPage  extends StatefulWidget{
   @override
 
-  _TestScaffoldPageState createState()=>_TestScaffoldPageState();
+  _TestWidgetPageState createState()=>_TestWidgetPageState();
 
 
 }
 
-class _TestScaffoldPageState extends State<TestWidgetPage> {
+class _TestWidgetPageState extends State<TestWidgetPage> {
+
+  ScrollController _scrollController;
 
   @override
 
   void initState() {
     super.initState();
+    _scrollController = ScrollController();
+    _scrollController.addListener(() {
+      //_scrollController.position.didEndScroll();
+    });
   }
 
   @override
@@ -30,21 +35,28 @@ class _TestScaffoldPageState extends State<TestWidgetPage> {
   Widget build(BuildContext context){
     return Scaffold(
       appBar: AppBar(
-        title:Text("组件测试1222223"),
+        title:Text("组件测试0000000000"),
       ),
 
-      body: Container(
-        child: GestureDetector(
-          onTap: () {
-            Navigator.push(context,MaterialPageRoute(builder: (context){
-              return TestScaffoldPage();
-            }));
-          },
-          child: Center(
-            child: Text("主要内容111111111111"),
-          ),
-        ),
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        padding: EdgeInsets.symmetric(horizontal: 20),
+        controller: _scrollController,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
 
+          mainAxisAlignment: MainAxisAlignment.center,
+
+          mainAxisSize: MainAxisSize.max,
+
+          children: <Widget>[
+            _buildRow(context),
+            _buildContainer(context),
+            _buildClipRRect(context),
+            _buildSizedBox(context),
+            _buildAspectRatio(context)
+          ],
+        ),
       ),
 
       floatingActionButton: FloatingActionButton(
@@ -70,8 +82,105 @@ class _TestScaffoldPageState extends State<TestWidgetPage> {
 
 
 
+
     );
 
    }
+
+   _buildRow(BuildContext context){
+    return Row(
+      children: <Widget>[
+        _buildExtended(context),
+        _buildIcon(context),
+      ],
+    );
+   }
+
+  _buildExtended(BuildContext context){
+    return Expanded(
+      child: _buildText(context),
+    );
+  }
+
+  _buildText(BuildContext context){
+    return Text(
+     "文本控件",
+      style: TextStyle(
+        color:Colors.amber,
+        fontSize: 16,
+        fontWeight: FontWeight.normal,
+        fontFamily: null,
+
+      ),
+      textAlign: TextAlign.center,
+      textDirection: TextDirection.ltr,
+
+    );
+  }
+
+
+  _buildIcon(BuildContext context){
+    return Icon(
+      Icons.home,
+      color: Colors.black12,
+      size:32
+
+    );
+  }
+
+  _buildContainer(BuildContext context){
+    return Container(
+        constraints: BoxConstraints.expand(height: 50),
+        decoration: BoxDecoration(
+          color: Colors.black12,
+          border: Border.all(color:Colors.amber,width: 3),
+          boxShadow: [
+            BoxShadow(color: Colors.black12, offset: Offset(0,5), blurRadius: 4),
+          ],
+          gradient: null
+        ),
+       padding: EdgeInsets.all(10),
+       margin: EdgeInsets.all(10),
+       child: _buildButton(context),
+    );
+  }
+
+  _buildButton(BuildContext context){
+    return FlatButton(
+        onPressed: (){},
+        child: Text("按钮"),
+
+    );
+  }
+
+  _buildAspectRatio(BuildContext context){
+    return AspectRatio(
+      aspectRatio: 16 / 9,
+      child: Container(
+        color:Colors.amberAccent
+      ),
+    );
+  }
+
+  _buildClipRRect(BuildContext context){
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(20),
+      child: _buildImage(context),
+    );
+  }
+
+  _buildImage(BuildContext context){
+    return Image(
+      image: new AssetImage("image/1.png"),
+      width: null,
+      height: null,
+      fit:BoxFit.fill
+
+    );
+  }
+
+  _buildSizedBox(BuildContext context){
+    return SizedBox(height: 10);
+  }
 
 }

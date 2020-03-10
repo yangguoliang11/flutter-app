@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'page/test_scaffold_page.dart';
+import 'page/test_widget_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: TestScaffoldPage(),
+      home: TestWidgetPage(),
     );
   }
 }
